@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vortex75 | {{ title }} {% endblock %}
+
+{% block body %}
+{% include '_header.html.twig' %}
+
+    <div class="container py-5">
+    <div class="row">
+        
+        <!-- Article principal -->
+        <div class="col-md-9">
+        <h1>{{ post.title }}</h1>
+        <p class="text-muted">
+            Publié le 
+            {{ post.publishedAt|date('d M Y') }}
+            par {% if post.author %} {{ post.author }}
+            {% else %} {{ 'Auteur inconnu' }}
+            {% endif %} 
+            | Catégorie : 
+            {% if post.category %} {{ post.category }}
+            {% else %} {{ 'Non catégorisé' }}
+            {% endif %}
+        </p>
+
+        {% if post.image %}
+            <img src="{{ asset('assets/images/' ~ post.image) }}" 
+                alt="<%= post.title %>" 
+                class="d-block mx-auto img-fluid my-3"
+                style="max-height: 400px; object-fit: cover;">
+        {% endif %}
+
+        <div class="mt-4">
+            {{ post.content|raw }}
+            <a href="/actualites" class="btn btn-catalogue">← Précédent</a>
+        </div>
+        </div>
+
+        <!-- Colonne droite : autres articles même catégorie -->
+        <div class="col-md-3">
+        
+            <div class="card">
+            <div class="card-header">
+                Articles dans {{ post.category.name }}
+            </div>
+            {% if similar_posts|length > 0 %}
+            <ul class="list-group list-group-flush">
+                {% for sp in similar_posts %}
+                <li class="list-group-item">
+                    <a href="/actualites/<%= sp.slug %>"><%= sp.title %></a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %} 
+                <li class="mx-5 my-3">
+                    Aucun article à affiché
+                </li>
+            {% endif %}
+            </div>
+        
+        </div>
+
+    </div>
+    </div>
+
+{% include '_footer.html.twig' %}
+{% endblock %}

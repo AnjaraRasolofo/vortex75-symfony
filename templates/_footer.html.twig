@@ -1,0 +1,54 @@
+</div>
+    <footer class="bg-dark text-light pt-5 pb-3 mt-5">
+        <div class="container">
+            <div class="row mb-5">
+                <div>
+                    <h2>Avertissements : </h2>
+                    <p style="color:#E63946;border:2px solid #E63946;padding:10px;">Le trading des instruments financiers, y compris les indices synthétiques et les actifs à effet de levier, comporte un niveau de risque élevé qui peut entraîner des pertes supérieures aux fonds investis. Il est essentiel de comprendre que le marché est imprévisible et que même les stratégies les plus avancées ne garantissent pas des gains. <strong><a href="{{ path('app_home') }}">Vortex75</a></strong> n'est pas responsable des pertes financières résultant des décisions de trading. Chaque trader est seul responsable de ses choix et doit s’assurer d’opérer en conformité avec la réglementation en vigueur dans son pays de résidence.</p>
+                </div>
+            </div>
+            <div class="row">
+    
+                <div class="col-md-4 mb-3">
+                    <h4 class="fw-bold text-white">Vortex75</h4>
+                    <p class="text-light">La plateforme dédiée au trading des indices synthétiques. Formations, outils, coaching & plus.</p>
+                </div>
+    
+                <!-- Liens rapides -->
+                <div class="col-md-3 mb-4">
+                    <h5 class="text-white mb-3">Navigation</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="/" class="text-decoration-none text-light nav-link <%= currentRoute == 'home' ? 'active' : '' %>">Accueil</a></li>
+                        <li><a href="/about" class="text-decoration-none text-light nav-link <%= currentRoute == 'abouts' ? 'active' : '' %>">A propos</a></li>
+                        <li><a href="/guides" class="text-decoration-none text-light nav-link <%= currentRoute == 'guides' ? 'active' : '' %>">Guides</a></li>
+                        <li><a href="/tutoriels" class="text-decoration-none text-light nav-link <%= currentRoute == 'ressources' ? 'active' : '' %>">Coaching</a></li>
+                        <li><a href="/actualites" class="text-decoration-none text-light nav-link <%= currentRoute == 'actualites' ? 'active' : '' %>">Actualités</a></li>
+                        <li><a href="/contact" class="text-decoration-none text-light nav-link <%= currentRoute == 'contact' ? 'active' : '' %>">Contact</a></li>
+                    </ul>
+                </div>
+
+                <div class="col-md-3 mb4">
+                    <h5 class="text-white mb-3">Downloads</h5>
+                    <ul class="list-unstyled">
+                        <li><a href="#" class="text-decoration-none text-light">Ebook gratuit</a></li>
+                        <li><a href="https://download.mql5.com/cdn/web/22698/mt5/derivsvg5setup.exe" class="text-decoration-none text-light">Meta Trader(MT5)</a></li>
+                        <li><a href="https://download.mql5.com/cdn/mobile/mt5/android?utm_source=www.metatrader5.com&utm_campaign=install.metaquotes" class="text-decoration-none text-light">MT5 pour Android</a></li>
+                    </ul>
+                </div>
+    
+                <!-- Réseaux sociaux -->
+                <div class="col-md-2 mb-4">
+                    <h5 class="text-white mb-3">Suivez-nous</h5>
+                    <a href="https://web.facebook.com/61576859477532" class="text-light me-3"><i class="bi bi-facebook fs-4"></i></a>
+                    <a href="#" class="text-light me-3"><i class="bi bi-instagram fs-4"></i></a>
+                    <a href="#" class="text-light"><i class="bi bi-twitter-x fs-4"></i></a>
+                </div>
+            </div>
+    
+            <hr class="border-secondary">
+    
+            <div class="text-center text-secondary small">
+                &copy; {{ "now"|date("Y") }} Vortex75 — Tous droits réservés.
+            </div>
+        </div>
+    </footer>
