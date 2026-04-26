@@ -1,0 +1,216 @@
+:root {
+    --vortex-dark: #1F2A40;
+    --vortex-blue: #0d6efd; /*#4F8DFD;*/
+    --vortex-green: #00C896;
+    --vortex-red: #FF5E5B;
+    --vortex-light: #c3c7cc;
+    --vortex-gray: #6B7280;
+}
+
+.navbar-custom {
+    height: 150px;
+    /*background-color: #e9ecef; */
+    background: linear-gradient(to right, var(--vortex-dark), #203a43, #2c5364);
+  }
+
+  .navbar-nav {
+    margin: 0 auto; 
+  }
+
+  .menu-logo {
+    height: 100%;
+    width: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: var(--vortex-gray);
+    font-size: 3em;
+  }
+
+  .menu-logo span {
+    color: var(--vortex-red);
+  }
+
+.feature-card {
+    background-color: var(--vortex-light);
+    border: 2px solid var(--vortex-blue);
+    color: var(--vortex-dark);
+    transition: 0.3s ease;
+}
+
+.feature-card:hover {
+    background-color: var(--vortex-blue);
+    color: white;
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+}
+
+.btn {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    background: var(--vortex-red);
+    color: black;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-catalogue {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    background: var(--vortex-dark);
+    color: white;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+/*
+.nav-link a {
+    color: red;
+    text-decoration: none;
+}
+
+.nav-link a:hover {
+    color: #ddd;
+}*/
+
+
+.btn:hover {
+  background-color: var(--vortex-red);
+}
+
+.btn-feature {
+    display: inline-block;
+    padding: 10px 20px;
+    font-size: 16px;
+    font-weight: 700;
+    background: var(--vortex-blue);
+    color: var(--vortex-light);
+    text-decoration: none;
+    border-radius: 5px;
+    transition: 0.3s;
+}
+
+.btn-feature:hover {
+  background-color: blue;
+}
+
+.bg-petrol {
+  background-color: var(--vortex-dark);
+}
+
+.section-biblio .btn-primary, .section-actu .btn-primary {
+    background-color: #00C896;
+    border: none;
+}
+
+.section-biblio .hero-img {
+    border-radius: 20px;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.15);
+    transform: rotate(-2deg);
+    transition: 0.3s ease;
+}
+
+.section-actu .hero-img {
+    border-radius: 20px;
+    transform: rotate(2deg);
+    transition: 0.3s ease;
+}
+
+.section-biblio .hero-img:hover, .section-actu .hero-img:hover {
+    transform: rotate(0deg) scale(1.03);
+    box-shadow: 0 15px 30px rgba(0, 0, 0, 0.2);
+}
+
+.nav-link:hover i {
+    color: #0d6efd;
+  }
+
+.feature-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.feature-card:hover {
+  transform: translateY(-10px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+  color: black;
+}
+
+.contact-card {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.contact-card:hover {
+  transform: translateY(-10px) scale(1.02);
+}
+
+.modal-signal {
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.modal-signal:hover {
+  animation: shake 0.5s ease forwards;
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+/*
+.user-link {
+    color: var(--vortex-red) !important;
+}
+
+.user-link:hover {
+    color: var(--vortex-blue) !important;
+}*/
+
+/* Définir l'animation du tremblement */
+@keyframes shake {
+  0% { transform: translateX(0); }
+  25% { transform: translateX(-5px); }
+  50% { transform: translateX(5px); }
+  75% { transform: translateX(-5px); }
+  100% { transform: translateX(0); }
+}
+
+  .flash-popup {
+    position: fixed;
+    top: 100px;
+    left: 50%;
+    transform: translateX(-50%);
+    padding: 15px 25px;
+    border-radius: 8px;
+    z-index: 9999;
+    color: white;
+    font-weight: bold;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+    opacity: 0.95;
+    animation: slideDown 0.5s ease;
+  }
+
+  .flash-success {
+    background-color: #28a745;
+  }
+
+  .flash-error {
+    background-color: #dc3545;
+  }
+
+  @keyframes slideDown {
+    from { top: -100px; opacity: 0; }
+    to { top: 20px; opacity: 0.95; }
+  }
+
+  .navbar-nav .nav-link {
+    color: #FFF;
+    transition: 0.2s ease;
+  }
+
+  .navbar-nav .nav-link.active {
+    color: var(--vortex-red) !important; 
+    font-weight: bold;
+    border-bottom: 2px solid var(--vortex-red);
+
+  }
