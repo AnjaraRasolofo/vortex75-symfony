@@ -1,0 +1,121 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vortex75 | {{ title }} {% endblock %}
+
+{% block body %}
+{% include '_header.html.twig' %}
+
+<div class="container py-5">
+<div class="row">
+    <div class="col-md-9">
+        <h2 class="mb-4">Derniers tutoriels</h2>
+
+            {% if tutorials is defined %}
+                {% for tuto in tutorials %}
+                    <div class="bg-light p-4 rounded shadow-sm mb-4 d-flex flex-column flex-md-row align-items-center">
+                        <div class="me-md-4 mb-3 mb-md-0 text-center">
+                            {% if tuto.image %}
+                                <img src="{{ asset('assets/images/' ~ tuto.image) }}"
+                                    alt="{{ tuto.title }}"
+                                    class="img-fluid rounded"
+                                    style="max-width: 200px; height: auto;">
+                            {% endif %}
+                        </div>
+
+                        <div class="flex-grow-1">
+                            <h5 class="fw-bold mb-2">
+                                <a href="{{ path('app_tutorial', { slug: tuto.slug }) }}" class="text-decoration-none text-dark">
+                                    {{ tuto.title }}
+                                </a>
+                            </h5>
+                            <p class="mb-2 text-muted small">
+                                Publié le {{ tuto.publishedAt|date('d M Y') }}
+                                    • Par {{ tuto.author.firstname }} {{ tuto.author.lastname }}
+                                    {% if tuto.category %}
+                                        • Catégorie : {{ tuto.category.name }}
+                                    {% else %}
+                                        • Non catégorisé
+                                    {% endif %}
+                            </p>
+                            <p class="mb-0">
+                                {{ tuto.summary }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% elseif category is defined %}
+                {% for tuto in category.tutorials|default([]) %}
+                    <div class="bg-light p-4 rounded shadow-sm mb-4 d-flex flex-column flex-md-row align-items-center">
+                        <div class="me-md-4 mb-3 mb-md-0 text-center">
+                            {% if tuto.image %}
+                                <img src="{{ asset('assets/images/' ~ tuto.image) }}"
+                                    alt="{{ tuto.title }}"
+                                    class="img-fluid rounded"
+                                    style="max-width: 200px; height: auto;">
+                            {% endif %}
+                        </div>
+
+                        <div class="flex-grow-1">
+                            <h5 class="fw-bold mb-2">
+                                <a href="{{ path('app_tutorial', { slug: tuto.slug }) }}" class="text-decoration-none text-dark">
+                                    {{ tuto.title }}
+                                </a>
+                            </h5>
+                            <p class="mb-2 text-muted small">
+                                Publié le {{ tuto.publishedAt|date('d M Y') }}
+                                    • Par {{ tuto.author.firstname }} {{ tuto.author.lastname }}
+                                    {% if tuto.category %}
+                                        • Catégorie : {{ tuto.category.name }}
+                                    {% else %}
+                                        • Non catégorisé
+                                    {% endif %}
+                            </p>
+                            <p class="mb-0">
+                                {{ tuto.summary }}
+                            </p>
+                        </div>
+                    </div>
+                {% endfor %}
+            {% else %}
+                <p>Aucun tutoriel disponible pour le moment.</p>
+            {% endif %}
+
+    </div>
+    {# Colonne des catégories #}
+    <div class="col-md-3">
+        <div class="card">
+            <div class="card-header">Catégories</div>
+            <ul class="list-group list-group-flush">
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{{ path('app_tutorials') }}">
+                            Tous les tutoriels
+                        </a>
+                    </li>
+                {% for categoryItem in categories|default([]) %}
+                    <li class="list-group-item d-flex justify-content-between align-items-center">
+                        <a href="{{ path('app_tutorials', { slug: categoryItem.slug }) }}">
+                            {{ categoryItem.name|default(categoryItem.slug) }}
+                        </a>
+                    </li>
+                {% endfor %}
+            </ul>
+        </div>
+    </div>
+    </div>
+</div>
+
+<nav aria-label="Pagination" class="mt-4">
+    <ul class="pagination justify-content-center">
+        {% for i in 1..totalPages %}
+            <li class="page-item {{ i == currentPage ? 'active' : '' }}">
+                <a class="page-link"
+                   href="{{ path('app_tutorials', {'slug': categorySlug, 'page': i}) }}">
+                    {{ i }}
+                </a>
+            </li>
+        {% endfor %}
+    </ul>
+</nav>
+
+{% include '_footer.html.twig' %}
+{% endblock %}

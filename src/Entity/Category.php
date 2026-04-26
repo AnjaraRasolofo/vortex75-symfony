@@ -31,9 +31,16 @@ class Category
     #[ORM\OneToMany(targetEntity: Post::class, mappedBy: 'category')]
     private Collection $posts;
 
+    /**
+     * @var Collection<int, Tutorial>
+     */
+    #[ORM\OneToMany(targetEntity: Tutorial::class, mappedBy: 'category')]
+    private Collection $tutorials;
+
     public function __construct()
     {
         $this->posts = new ArrayCollection();
+        $this->tutorials = new ArrayCollection();
     }
 
     public function __toString()
@@ -106,6 +113,36 @@ class Category
             // set the owning side to null (unless already changed)
             if ($post->getCategory() === $this) {
                 $post->setCategory(null);
+            }
+        }
+
+        return $this;
+    }
+
+    /**
+     * @return Collection<int, Tutorial>
+     */
+    public function getTutorials(): Collection
+    {
+        return $this->tutorials;
+    }
+
+    public function addTutorial(Tutorial $tutorial): static
+    {
+        if (!$this->tutorials->contains($tutorial)) {
+            $this->tutorials->add($tutorial);
+            $tutorial->setCategory($this);
+        }
+
+        return $this;
+    }
+
+    public function removeTutorial(Tutorial $tutorial): static
+    {
+        if ($this->tutorials->removeElement($tutorial)) {
+            // set the owning side to null (unless already changed)
+            if ($tutorial->getCategory() === $this) {
+                $tutorial->setCategory(null);
             }
         }
 

@@ -1,0 +1,67 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vortex75 | {{ title }} {% endblock %}
+
+{% block body %}
+{% include '_header.html.twig' %}
+
+    <div class="container py-5">
+    <div class="row">
+        
+        <!-- Tutoriel principal -->
+        <div class="col-md-9">
+        <h1>{{ tutorial.title }}</h1>
+        <p class="text-muted">
+            Publié le 
+            {{ tutorial.publishedAt|date('d M Y') }}
+            par {% if tutorial.author %} {{ tutorial.author }}
+            {% else %} {{ 'Auteur inconnu' }}
+            {% endif %} 
+            | Catégorie : 
+            {% if tutorial.category %} {{ tutorial.category }}
+            {% else %} {{ 'Non catégorisé' }}
+            {% endif %}
+        </p>
+
+        {% if tutorial.image %}
+            <img src="{{ asset('assets/images/' ~ tutorial.image) }}" 
+                alt="<%= tutorial.title %>" 
+                class="d-block mx-auto img-fluid my-3"
+                style="max-height: 400px; object-fit: cover;">
+        {% endif %}
+
+        <div class="mt-4">
+            {{ tutorial.content|raw }}
+            <a href="/tutoriels" class="btn btn-catalogue">← Précédent</a>
+        </div>
+        </div>
+
+        <!-- Colonne droite : autres tutoriels même catégorie -->
+        <div class="col-md-3">
+        
+            <div class="card">
+            <div class="card-header">
+                Tutoriels dans {{ tutorial.category.name }}
+            </div>
+            {% if similar_tutorials|length > 0 %}
+            <ul class="list-group list-group-flush">
+                {% for st in similar_tutorials %}
+                <li class="list-group-item">
+                    <a href="/tutoriels/<%= st.slug %>"><%= st.title %></a>
+                </li>
+                {% endfor %}
+            </ul>
+            {% else %} 
+                <li class="mx-5 my-3">
+                    Aucun tutoriel à affiché
+                </li>
+            {% endif %}
+            </div>
+        
+        </div>
+
+    </div>
+    </div>
+
+{% include '_footer.html.twig' %}
+{% endblock %}

@@ -1,0 +1,113 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ProductController!{% endblock %}
+
+{% block body %}
+{% include '_header.html.twig' %}
+
+<div class="container">
+
+<div class="container py-5">
+
+    <!-- Hero section -->
+    <div class="row align-items-center mb-5">
+        <div class="col-md-6">
+            <h1 class="display-5 fw-bold">Experts & Indicators</h1>
+            <p class="lead">Découvrez le robot de trading qui booste vos résultats. Essayez-le gratuitement en mode démo, sans risque !</p>
+             <div class="mt-4 d-flex gap-3">
+                <a href="{{ path('app_catalogue') }}" class="btn btn-primary btn-lg">Voir le catalogue</a>
+
+                {% if app.user %}
+                    <a href="{{ path('app_account') }}" class="btn btn-outline-secondary btn-lg">Mon compte</a>
+                {% else %}
+                    <a href="{{ path('app_login') }}" class="btn btn-outline-secondary btn-lg">Se connecter</a>
+                {% endif %}
+            </div>
+        </div>
+        <div class="col-md-6">
+            <img src="{{asset("/assets/images/experts.jpg")}}" alt="experts" class="img-fluid rounded shadow">
+        </div>
+    </div>
+
+    <!-- Catégories -->
+    <h2 class="text-center mb-4">Nos Catégories</h2>
+    <div class="row text-center mb-5">
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-robot display-4 text-primary mb-3"></i>
+                    <h5 class="card-title">Experts</h5>
+                    <p class="card-text">Gratuits, Payants, et plus.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-graph-up-arrow display-4 text-success mb-3"></i>
+                    <h5 class="card-title">Indicateurs</h5>
+                    <p class="card-text">Libre, Pas cher, en promotion.</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-md-4 mb-3">
+            <div class="card h-100 shadow-sm">
+                <div class="card-body">
+                    <i class="bi bi-gear display-4 text-warning mb-3"></i>
+                    <h5 class="card-title">Utilitaires</h5>
+                    <p class="card-text">Signals, copy trading, plugins.</p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <h2 class="text-center mb-4 mt-5">Produits Populaires</h2>
+
+    <div id="produitsPopulairesCarousel" class="carousel slide" data-ride="carousel">
+        <div class="carousel-inner">
+                <div class="carousel-item <%= index === 0 ? 'active' : '' %>">
+                    <div class="container">
+                        <div class="row justify-content-center">
+                            {% for product in products %}
+                                <div class="col-md-3">
+                                    <div class="card h-100 mb-3 shadow-sm">
+                                        <img src="/images/produits/{{ product.image }}" class="card-img-top object-fit-cover" style="height: 200px;" alt="{{ product.name }}">
+                                        <div class="card-body text-center justify-content-end">
+                                            <h5 class="card-title">{{ product.name }}</h5>
+                                            <p class="">{{ product.type }}</p>
+                                        </div>
+                                        <div class="card-footer d-flex justify-content-between align-items-center gap-2">
+                                            <p class="text-success fw-bold mb-0">{{ product.price }}$</p>
+                                            <a href="/experts/<%= product.id %>" class="btn btn-outline-info btn-sm">Voir</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            {% endfor %}
+                        </div>
+                    </div>
+                </div>
+        </div>
+    </div>
+
+    <!-- Newsletter -->
+    <div class="bg-light p-5 mt-5 rounded shadow-sm">
+        <h3 class="mb-3">Abonnez-vous à notre newsletter</h3>
+        <p>Recevez les nouveautés et promotions directement dans votre boîte mail.</p>
+
+        <form action="{{ path('app_newsletter') }}" method="POST" class="row g-3 mt-3">
+            <div class="col-md-8">
+                <input type="email" name="email" class="form-control" placeholder="Votre adresse e-mail" required>
+            </div>
+            <div class="col-md-4">
+                <button class="btn btn-success w-100">S’abonner</button>
+            </div>
+        </form>
+    </div>
+
+</div>
+
+
+
+</div>
+{% include '_footer.html.twig' %}
+{% endblock %}

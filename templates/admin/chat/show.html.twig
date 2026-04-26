@@ -1,0 +1,50 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversation #{{ conversation.id }}{% endblock %}
+
+{% block body %}
+    <h1>Conversation avec {{ conversation.customer.email }}</h1>
+
+    <div id="admin-chat-messages" style="border:1px solid #ddd; border-radius:8px; padding:16px; min-height:300px; margin-bottom:20px;">
+        {% for message in messages %}
+            <div style="margin-bottom:12px; text-align: {{ message.sender.id == app.user.id ? 'right' : 'left' }};">
+                <div style="display:inline-block; max-width:70%; padding:10px 12px; border-radius:10px; background: {{ message.sender.id == app.user.id ? '#d1e7ff' : '#f1f1f1' }};">
+                    <div>{{ message.content }}</div>
+                    <small>{{ message.createdAt|date('d/m/Y H:i') }}</small>
+                </div>
+            </div>
+        {% endfor %}
+    </div>
+
+    <form id="admin-chat-form">
+        <textarea id="admin-chat-input" rows="3" style="width:100%;"></textarea>
+        <button type="submit">Répondre</button>
+    </form>
+
+    <script>
+        const adminForm = document.getElementById('admin-chat-form');
+        const adminInput = document.getElementById('admin-chat-input');
+        const adminMessages = document.getElementById('admin-chat-messages');
+        const sendUrl = '{{ path('app_chat_send', {id: conversation.id}) }}';
+
+        adminForm.addEventListener('submit', async (e) => {
+            e.preventDefault();
+
+            const content = adminInput.value.trim();
+            if (!content) return;
+
+            const response = await fetch(sendUrl, {
+                method: 'POST',
+                headers: {'Content-Type': 'application/json'},
+                body: JSON.stringify({content})
+            });
+
+            if (!response.ok) {
+                alert('Erreur lors de l’envoi.');
+                return;
+            }
+
+            adminInput.value = '';
+        });
+    </script>
+{% endblock %}

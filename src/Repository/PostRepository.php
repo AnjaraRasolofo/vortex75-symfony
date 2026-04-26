@@ -16,6 +16,20 @@ class PostRepository extends ServiceEntityRepository
         parent::__construct($registry, Post::class);
     }
 
+    public function findLatestPosts(?int $lastId, int $limit = 10)
+    {
+        $qb = $this->createQueryBuilder('p')
+            ->orderBy('p.id', 'DESC')
+            ->setMaxResults($limit);
+
+        if ($lastId) {
+            $qb->andWhere('p.id < :lastId')
+            ->setParameter('lastId', $lastId);
+        }
+
+        return $qb->getQuery()->getResult();
+    }
+
     //    /**
     //     * @return Post[] Returns an array of Post objects
     //     */

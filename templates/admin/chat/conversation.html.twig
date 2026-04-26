@@ -1,0 +1,13 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vortex75 | {{ title }}{% endblock %}
+
+{% block body %}
+{% include '_header.html.twig' %}
+<div class="container">
+    <div id="react-chat" data-type="admin"></div>
+    {{ encore_entry_script_tags('app') }}
+</div>
+    
+{% include '_footer.html.twig' %}
+{% endblock %}

@@ -17,14 +17,14 @@ class SignalController extends AbstractController
     {
         $signals = $signalRepository->findAll();
         
-        return $this->json($signals);
+        return $this->json($signals, 200);
     }
 
     #[Route("/api/signal/{id}", methods:['GET'])]
     public function show($id, SignalRepository $signalRepository): JsonResponse
     {
         $signal = $signalRepository->findOneById($id);
-        return $this->json($signal);
+        return $this->json($signal, 200);
     }
 
     #[Route("/api/signal", methods: ['POST'])]
@@ -97,6 +97,6 @@ class SignalController extends AbstractController
         $entityManager->remove($signal);
         $entityManager->flush();
 
-        return $this->json(['message' => 'Signal supprimé']);
+        return $this->json(['message' => 'Signal supprimé'], 201);
     }
 }

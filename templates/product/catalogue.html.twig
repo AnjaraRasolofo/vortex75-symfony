@@ -1,0 +1,141 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vortex 75 | {{ title }}{% endblock %}
+
+{% block body %}
+
+{% include '_header.html.twig' %}
+
+<div class="container mt-4">
+  <div class="row">
+
+    <!-- Filtres -->
+    <div class="col-md-3">
+      <h5>Filtres</h5>
+
+      <form method="GET" action="{{ path('app_catalogue') }}">
+
+        <div class="mb-3">
+          <label class="form-label">Type de produits</label>
+          <select name="type" class="form-select">
+            <option value="">Toutes</option>
+
+            <option value="Expert" {% if type == 'Expert' %}selected{% endif %}>
+              Expert
+            </option>
+
+            <option value="Indicateur" {% if type == 'Indicateur' %}selected{% endif %}>
+              Indicateur
+            </option>
+          </select>
+        </div>
+
+        <div class="mb-3">
+          <label class="form-label">Prix maximum</label>
+          <input
+            type="number"
+            name="price"
+            class="form-control"
+            placeholder="Ex: 100$"
+            value="{{ price ?? '' }}"
+          >
+        </div>
+
+        <button type="submit" class="btn btn-primary w-100">
+          Filtrer
+        </button>
+      </form>
+    </div>
+
+    <!-- Produits -->
+    <div class="col-md-9">
+      <div class="row">
+
+        {% for product in products %}
+          <div class="col-md-4 mb-4">
+            <div class="card h-100">
+
+              <img
+                src="{{ asset('assets/images/products/' ~ product.image) }}"
+                class="card-img-top object-fit-cover"
+                style="height: 200px;"
+                alt="{{ product.name }}"
+              >
+
+              <div class="card-body">
+                <h5 class="card-title">{{ product.name }}</h5>
+
+                <p class="card-text">
+                  {{ product.company ?? 'N/A' }} - {{ product.type }}
+                </p>
+
+                <p class="card-text text-success fw-bold">
+                  {{ product.price }} $
+                </p>
+              </div>
+
+              <div class="card-footer d-flex justify-content-end gap-2">
+
+                <a href="{{ path('app_expert', { id: product.id }) }}"
+                   class="btn btn-sm btn-catalogue">
+                  Voir
+                </a>
+
+                <form method="POST"
+                      action="{{ path('cart_add', { id: product.id }) }}">
+                  <button type="submit"
+                          class="btn btn-sm btn-catalogue">
+                    Ajouter
+                  </button>
+                </form>
+
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+
+      </div>
+
+      <!-- Pagination -->
+      {% if pagination is defined %}
+
+        <nav>
+          <ul class="pagination justify-content-center">
+
+            {# Précédent #}
+            <li class="page-item {% if pagination.currentPage <= 1 %}disabled{% endif %}">
+              <a class="page-link"
+                 href="?page={{ pagination.currentPage - 1 }}">
+                <i class="bi bi-chevron-left"></i>
+              </a>
+            </li>
+
+            {# Pages #}
+            {% for i in 1..pagination.totalPages %}
+              <li class="page-item {% if i == pagination.currentPage %}active{% endif %}">
+                <a class="page-link" href="?page={{ i }}">
+                  {{ i }}
+                </a>
+              </li>
+            {% endfor %}
+
+            {# Suivant #}
+            <li class="page-item {% if pagination.currentPage >= pagination.totalPages %}disabled{% endif %}">
+              <a class="page-link"
+                 href="?page={{ pagination.currentPage + 1 }}">
+                <i class="bi bi-chevron-right"></i>
+              </a>
+            </li>
+
+          </ul>
+        </nav>
+
+      {% endif %}
+
+    </div>
+  </div>
+</div>
+
+{% include '_footer.html.twig' %}
+
+{% endblock %}

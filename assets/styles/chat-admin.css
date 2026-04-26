@@ -1,0 +1,106 @@
+.admin-chat-container {
+    width: 70%;
+    padding: 10px;
+}
+
+.admin-chat-box {
+    height: 50vh;
+    overflow-y: auto;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+/* Base message */
+.admin-message {
+    display: flex;
+    width: 100%;
+}
+
+/* Message client → gauche */
+.admin-message.client {
+    justify-content: flex-start;
+}
+
+/* Message admin → droite */
+.admin-message.admin {
+    justify-content: flex-end;
+}
+
+/* Bulle commune */
+.admin-bubble {
+    max-width: 60%;
+    padding: 10px 14px;
+    border-radius: 12px;
+    word-wrap: break-word;
+}
+
+/* Style client */
+.admin-message.client .admin-bubble {
+    background-color: #f1f1f1;
+    color: #333;
+}
+
+/* Style admin */
+.admin-message.admin .admin-bubble {
+    background-color: #0d6efd;
+    color: white;
+}
+
+/* Nom */
+.admin-sender {
+    font-size: 12px;
+    font-weight: bold;
+    display: block;
+    margin-bottom: 4px;
+}
+
+/* STYLE DE CHAT INPUT */
+.chat-input-container {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    padding: 10px;
+    border-top: 1px solid #ddd;
+    background: #fff;
+}
+
+/* Input */
+.chat-input {
+    flex: 1;
+    padding: 12px 14px;
+    border-radius: 20px;
+    border: 1px solid #ccc;
+    outline: none;
+    font-size: 14px;
+    transition: all 0.2s ease;
+}
+
+/* Focus */
+.chat-input:focus {
+    border-color: #0d6efd;
+    box-shadow: 0 0 0 2px rgba(13, 110, 253, 0.2);
+}
+
+/* Bouton */
+.chat-send-btn {
+    padding: 10px 16px;
+    border: none;
+    border-radius: 20px;
+    background-color: #0d6efd;
+    color: white;
+    font-weight: 500;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+/* Hover */
+.chat-send-btn:hover {
+    background-color: #0b5ed7;
+}
+
+/* Désactivé (optionnel) */
+.chat-send-btn:disabled {
+    background-color: #ccc;
+    cursor: not-allowed;
+}

@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Conversations{% endblock %}
+
+{% block body %}
+    <h1>Conversations</h1>
+
+    <div style="display:grid; gap:12px;">
+        {% for row in rows %}
+            <a href="{{ path('app_admin_chat_show', {id: row.conversation.id}) }}"
+               style="display:block; padding:12px; border:1px solid #ddd; border-radius:8px; text-decoration:none; color:inherit;">
+                <div><strong>{{ row.conversation.customer.email }}</strong></div>
+                <div>Statut : {{ row.conversation.status }}</div>
+                <div>Dernière activité : {{ row.conversation.updatedAt|date('d/m/Y H:i') }}</div>
+                <div>Non lus : {{ row.unread }}</div>
+            </a>
+        {% else %}
+            <p>Aucune conversation.</p>
+        {% endfor %}
+    </div>
+{% endblock %}

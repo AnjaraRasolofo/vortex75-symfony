@@ -41,7 +41,7 @@ final class HomeController extends AbstractController
                 'title' => 'Gestion du Capital',
                 'desc' => 'Apprenez à gérer efficacement votre portefeuille d’investissement.',
                 'btn' => 'Voir plus',
-                'url' => '/actualites/categorie/gestion-des-risques',
+                'url' => '/actualites/gestion-des-risques',
                 'modal' => false
             ],
             [
@@ -58,7 +58,7 @@ final class HomeController extends AbstractController
                 'title' => 'Sécurité & Stratégie',
                 'desc' => 'Protégez vos investissements avec des stratégies avancées.',
                 'btn' => 'Commencer',
-                'url' => '/actualites/categorie/strategies-de-trading',
+                'url' => '/actualites/strategies-de-trading',
                 'modal' => false
             ]
         ];
