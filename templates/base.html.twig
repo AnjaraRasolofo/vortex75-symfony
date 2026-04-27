@@ -23,6 +23,18 @@
         {% if is_granted('ROLE_USER') and not is_granted('ROLE_ADMIN') %}
         <div id="react-chat" data-type="chat"></div>
         {% endif %}
+        
+        <script>
+        
+        document.getElementById('discussion-direct').addEventListener('click', function() {
+            
+           const fab = document.querySelector('#react-chat .chat-fab');
+
+        if (fab) {
+            fab.click(); // 🔥 déclenche l'ouverture du chat
+        }
+        });
+        </script> 
 
         {{ encore_entry_script_tags('app') }}
        

@@ -14,23 +14,24 @@
 
             <!-- Liens gauche -->
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        
                 <li class="nav-item">
-                    <a class="nav-link {{ currentRoute == 'about' ? 'active' : '' }}" href="/about">A propos</a>
+                    <a class="nav-link text-white {{ currentRoute == 'app_about' ? 'active' : '' }}" href="/about">A propos</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ currentRoute == 'guide' ? 'active' : '' }}" href="/guides">Guides</a>
+                    <a class="nav-link text-white {{ currentRoute == 'app_guide' ? 'active' : '' }}" href="/guides">Guides</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ currentRoute == 'experts' ? 'active' : '' }}" href="/experts">Indicateurs et Experts</a>
+                    <a class="nav-link text-white {{ currentRoute == 'app_experts' ? 'active' : '' }}" href="/experts">Indicateurs et Experts</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ currentRoute == 'ressources' ? 'active' : '' }}" href="/tutoriels">Formations</a>
+                    <a class="nav-link text-white {{ currentRoute == 'app_tutorials' ? 'active' : '' }}" href="/tutoriels">Formations</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ currentRoute == 'actualites' ? 'active' : '' }}" href="/actualites">Actualités</a>
+                    <a class="nav-link text-white {{ currentRoute == 'app_posts' ? 'active' : '' }}" href="/actualites">Actualités</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link {{ currentRoute == 'contact' ? 'active' : '' }}" href="/contact">Contact</a>
+                    <a class="nav-link text-white {{ currentRoute == 'app_contact' ? 'active' : '' }}" href="/contact">Contact</a>
                 </li>
             </ul>
 
@@ -47,7 +48,7 @@
 
                 {% else %}
                     <li class="nav-item dropdown">
-                        <a class="nav-link user-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        <a class="nav-link user-link dropdown-toggle text-white" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
                             <strong><i class="bi bi-person"></i> {{ app.user.firstname }}</strong>
                         </a>
 

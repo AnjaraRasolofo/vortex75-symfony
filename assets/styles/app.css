@@ -157,14 +157,14 @@
   animation: shake 0.5s ease forwards;
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-/*
+
 .user-link {
     color: var(--vortex-red) !important;
 }
 
 .user-link:hover {
     color: var(--vortex-blue) !important;
-}*/
+}
 
 /* Définir l'animation du tremblement */
 @keyframes shake {

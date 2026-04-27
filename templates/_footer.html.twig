@@ -18,12 +18,42 @@
                 <div class="col-md-3 mb-4">
                     <h5 class="text-white mb-3">Navigation</h5>
                     <ul class="list-unstyled">
-                        <li><a href="/" class="text-decoration-none text-light nav-link <%= currentRoute == 'home' ? 'active' : '' %>">Accueil</a></li>
-                        <li><a href="/about" class="text-decoration-none text-light nav-link <%= currentRoute == 'abouts' ? 'active' : '' %>">A propos</a></li>
-                        <li><a href="/guides" class="text-decoration-none text-light nav-link <%= currentRoute == 'guides' ? 'active' : '' %>">Guides</a></li>
-                        <li><a href="/tutoriels" class="text-decoration-none text-light nav-link <%= currentRoute == 'ressources' ? 'active' : '' %>">Coaching</a></li>
-                        <li><a href="/actualites" class="text-decoration-none text-light nav-link <%= currentRoute == 'actualites' ? 'active' : '' %>">Actualités</a></li>
-                        <li><a href="/contact" class="text-decoration-none text-light nav-link <%= currentRoute == 'contact' ? 'active' : '' %>">Contact</a></li>
+                        <li>
+                            <a href="{{ path('app_home') }}"
+                            class="text-decoration-none text-light nav-link {{ app.request.attributes.get('_route') == 'app_home' ? 'active' : '' }}">
+                            Accueil
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_about') }}"
+                            class="text-decoration-none text-light nav-link {{ app.request.attributes.get('_route') == 'app_about' ? 'active' : '' }}">
+                            A propos
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_guide') }}"
+                            class="text-decoration-none text-light nav-link {{ app.request.attributes.get('_route') == 'app_guide' ? 'active' : '' }}">
+                            Guides
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_tutorials') }}"
+                            class="text-decoration-none text-white nav-link {{ app.request.attributes.get('_route') == 'app_tutorials' ? 'active' : '' }}">
+                            Coaching
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_posts') }}"
+                            class="text-decoration-none text-light nav-link {{ app.request.attributes.get('_route') == 'app_posts' ? 'active' : '' }}">
+                            Actualités
+                            </a>
+                        </li>
+                        <li>
+                            <a href="{{ path('app_contact') }}"
+                            class="text-decoration-none text-light nav-link {{ app.request.attributes.get('_route') == 'contact' ? 'active' : '' }}">
+                            Contact
+                            </a>
+                        </li>
                     </ul>
                 </div>
 
@@ -39,9 +69,7 @@
                 <!-- Réseaux sociaux -->
                 <div class="col-md-2 mb-4">
                     <h5 class="text-white mb-3">Suivez-nous</h5>
-                    <a href="https://web.facebook.com/61576859477532" class="text-light me-3"><i class="bi bi-facebook fs-4"></i></a>
-                    <a href="#" class="text-light me-3"><i class="bi bi-instagram fs-4"></i></a>
-                    <a href="#" class="text-light"><i class="bi bi-twitter-x fs-4"></i></a>
+                    <a href="https://www.facebook.com/61576859477532" class="text-light me-3" target="_blank"><i class="bi bi-facebook fs-4"></i></a>
                 </div>
             </div>
     
