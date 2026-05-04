@@ -11,17 +11,22 @@ use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Mercure\HubInterface;
 use Symfony\Component\Routing\Attribute\Route;
-use Lexik\Bundle\JWTAuthenticationBundle\Services\JWTTokenManagerInterface;
 use Symfony\Component\Mercure\Update;
+use Lcobucci\JWT\Configuration;
 
 
 final class ChatController extends AbstractController
 {
     // src/Controller/ChatController.php
    #[Route('/chat/open', name: 'app_chat_open')]
-   public function open(EntityManagerInterface $em, ConversationRepository $repo, JWTTokenManagerInterface $jwtManager): JsonResponse
+   public function open(EntityManagerInterface $em, ConversationRepository $repo): JsonResponse
    {
        $user = $this->getUser();
+
+       if (!$user) {
+            return $this->json(['error' => 'Non connecté'], 401);
+        }
+
        $conversation = $repo->findOneBy(['customer' => $user, 'status' => 'open']);
        if (!$conversation) {
            $conversation = new Conversation();
@@ -34,12 +39,11 @@ final class ChatController extends AbstractController
            $em->flush();
        }
 
-       //$token = $this->generateJwtTokenForUser($user);
-       $token = $jwtManager->create($user);
-        //dump($user); die;
+       $update = new Update('chat', json_encode(['message' => 'hello']));
+
        return $this->json([
            'conversationId' => $conversation->getId(),
-           'jwtToken' => $token, // Envoyer le token au frontend
+           'mercureUrl' => $_ENV['MERCURE_PUBLIC_URL'],
        ]);
    }
 
@@ -53,7 +57,7 @@ final class ChatController extends AbstractController
             $messages[] = [
                 'id' => $message->getId(),
                 'text' => $message->getContent(),
-                'fromUser' => $message->getSender()->getId() === $currentUser,
+                'fromUser' => $message->getSender()->getId() === $currentUser->getId(),
                 'createdAt' => $message->getCreatedAt()->format('H:i'),
                 'isAdmin' => in_array('ROLE_ADMIN', $message->getSender()->getRoles()),
                 'senderName' => $message->getSender()->getFirstname(),
@@ -85,22 +89,17 @@ final class ChatController extends AbstractController
        
        $em->flush();
        
-       
-
+    
        $topic = sprintf('conversation/%d', $conversation->getId());
        $update = new Update($topic, json_encode([
            'id' => $message->getId(),
            'content' => $message->getContent(),
            'createdAt' => $message->getCreatedAt()->format('H:i'),
-           'senderId' => $user,
+           'senderId' => $user->getId(),
+           'senderName' => $user->getFirstname(),
+           'isAdmin' => true,
+           'createdAt'=> $message->getCreatedAt()->format('H:i')
        ]));
-
-       try {
-            $hub->publish($update);
-        } catch (\Exception $e) {
-            dump($e->getMessage());
-            die;
-        }
 
        $hub->publish($update);
 

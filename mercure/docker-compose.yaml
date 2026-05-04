@@ -1,0 +1,17 @@
+version: '3.8'
+
+services:
+  mercure:
+    image: dunglas/mercure
+    container_name: mercure
+    restart: unless-stopped
+    ports:
+      - "3000:80"
+    environment:
+      SERVER_NAME: ":80"
+      MERCURE_PUBLISHER_JWT_KEY: "Qm9tV3xk9sL2xZ8pR4vN6tY7cA1bD3eF5gH7jK9mP0"
+      MERCURE_SUBSCRIBER_JWT_KEY: "Qm9tV3xk9sL2xZ8pR4vN6tY7cA1bD3eF5gH7jK9mP0"
+      MERCURE_EXTRA_DIRECTIVES: |
+        cors_origins *
+        anonymous
+    command: /usr/bin/caddy run --config /etc/caddy/Caddyfile

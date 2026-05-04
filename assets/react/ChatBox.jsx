@@ -9,6 +9,8 @@ export default function ChatBox() {
     const [input, setInput] = useState('');
     const [conversationId, setConversationId] = useState(null);
     const [jwtToken, setJwtToken] = useState(null);
+    const [mercureUrl, setMercureUrl] = useState(null);
+    const [topic, setTopic] = useState(null);
 
     const eventSourceRef = useRef(null);
 
@@ -17,6 +19,8 @@ export default function ChatBox() {
         const res = await axios.get('/chat/open');
         setConversationId(res.data.conversationId);
         setJwtToken(res.data.jwtToken);
+        setMercureUrl(res.data.mercureUrl);
+        setTopic(res.data.topic);
         //console.log('Token:', jwtToken);
         await loadMessages(res.data.conversationId);
     }
@@ -43,7 +47,7 @@ export default function ChatBox() {
         if (!conversationId || !jwtToken) return;
 
         const es = new EventSource(
-            `http://localhost:3000/.well-known/mercure?topic=chat/conversation/${conversationId}&jwt=${jwtToken}`
+            `http://localhost:3000/.well-known/mercure?topic=conversation/${conversationId}&jwt=${jwtToken}`
         );
 
         es.onmessage = (event) => {

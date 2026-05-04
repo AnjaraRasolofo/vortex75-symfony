@@ -1,0 +1,14 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Vortex75 - Signals{% endblock %}
+
+{% block body %}
+{% include '_header.html.twig' %}
+
+<div id="signals-root" data-signals='{{ signals|json_encode|e("html_attr") }}'>
+</div>
+
+{{ encore_entry_script_tags('app') }}
+
+    {% include '_footer.html.twig' %}
+{% endblock %}

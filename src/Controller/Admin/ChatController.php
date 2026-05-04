@@ -34,8 +34,6 @@ final class ChatController extends AbstractController
             ['updatedAt' => 'DESC']
         );
 
-        
-
         foreach ($conversations as $c) {
             $messages = $c->getMessages();
 
@@ -100,20 +98,18 @@ final class ChatController extends AbstractController
 
         $em->flush();
 
-        try {
-            $hub->publish(new Update(
+        $update = new Update(
             sprintf('conversation/%d', $conversation->getId()),
             json_encode([
                 'id' => $message->getId(),
                 'content' => $message->getContent(),
-                'senderId' => $admin,
-                'createdAt' => $message->getCreatedAt()->format('H:i'),
-            ])
-        ));
-        } catch (\Exception $e) {
-            dump($e->getMessage());
-            die();
-        }
+                'senderId' => $admin->getId(),
+                'senderName' => $admin->getFirstname(),
+                'isAdmin' => true,
+                'createdAt' => $message->getCreatedAt()->format('H:i')
+            ]));
+
+            $hub->publish($update);
 
         return $this->json(['success' => true]);
     }

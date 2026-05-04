@@ -33,11 +33,17 @@ class Signal
     private ?float $takeProfit = null;
 
     #[ORM\Column(length: 255, nullable: true)]
-    private ?string $result = null;
+    private ?string $result = 'pending';
 
     #[ORM\Column(length: 255, nullable: true)]
     private ?string $graphic = null;
 
+    public function __construct()
+    {
+        $this->publishedAt = new \DateTimeImmutable();
+        $this->result = 'pending';
+    }
+    
     public function getId(): ?int
     {
         return $this->id;

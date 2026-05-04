@@ -10,7 +10,26 @@ export default function AdminChat() {
 
     useEffect(() => {
         loadConversations();
-    }, []);
+        if (!selected) return;
+
+        const es = new EventSource(
+            `http://localhost:3000/.well-known/mercure?topic=conversation/${selected}&jwt=${jwtToken}`
+        );
+
+        es.onmessage = (event) => {
+            const data = JSON.parse(event.data);
+
+            setMessages(prev => [...prev, {
+                id: data.id,
+                content: data.content,
+                sender: data.senderName,
+                isAdmin: data.isAdmin,
+                createdAt: data.createdAt
+            }]);
+        };
+
+        return () => es.close();
+    }, [selected]);
 
     const loadConversations = async () => {
         const res = await axios.get('/admin/chat');
@@ -84,26 +103,6 @@ export default function AdminChat() {
         </div>
     );
 }
-/*
-function ChatInput({ onSend }) {
-    const [text, setText] = useState('');
-
-    return (
-        <div>
-            <input
-                value={text}
-                onChange={e => setText(e.target.value)}
-                placeholder="Répondre..."
-            />
-            <button onClick={() => {
-                onSend(text);
-                setText('');
-            }}>
-                Envoyer
-            </button>
-        </div>
-    );
-}*/
 
 function ChatInput({ onSend }) {
     const [text, setText] = useState('');

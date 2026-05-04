@@ -2,6 +2,7 @@ import React from 'react';
 import { createRoot } from 'react-dom/client';
 import ChatBox from './ChatBox';
 import AdminChat from './AdminChat';
+import SignalPage from './SignalsPage';
 //// '../styles/chat.css';
 //import '../styles/bootstrap.min.css';
 //import '../styles/chat-admin.css';
@@ -20,7 +21,13 @@ if (!container) {
 
     if (type === 'admin') {
         root.render(<AdminChat />);
-    } else if(type === 'chat'){
+    } 
+    else if(type === 'chat'){
         root.render(<ChatBox conversationId={conversationId} />);
+    }
+    else if (type === 'signals') { 
+        root.render(<SignalsPage />);
+    } else {
+        console.warn('Type inconnu:', type);
     }
 }

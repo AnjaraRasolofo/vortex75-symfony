@@ -1,14 +1,15 @@
 :root {
-    --vortex-dark: #1F2A40;
-    --vortex-blue: #0d6efd; /*#4F8DFD;*/
-    --vortex-green: #00C896;
-    --vortex-red: #FF5E5B;
-    --vortex-light: #c3c7cc;
-    --vortex-gray: #6B7280;
+    --vortex-dark: #111827;
+    --vortex-blue: #2563eb;
+    --vortex-green: #10b981;
+    --vortex-red: #ef4444;
+    --vortex-light: #f8fafc;
+    --vortex-gray: #6b7280;
 }
 
+
 .navbar-custom {
-    height: 150px;
+    min-height: 90px;
     /*background-color: #e9ecef; */
     background: linear-gradient(to right, var(--vortex-dark), #203a43, #2c5364);
   }
@@ -19,13 +20,13 @@
 
   .menu-logo {
     height: 100%;
-    width: 60px;
+    width: auto;
     display: flex;
     align-items: center;
     justify-content: center;
     font-weight: bold;
     color: var(--vortex-gray);
-    font-size: 3em;
+    font-size: 2.2rem;
   }
 
   .menu-logo span {
@@ -33,29 +34,33 @@
   }
 
 .feature-card {
-    background-color: var(--vortex-light);
-    border: 2px solid var(--vortex-blue);
+    background: #fff;
+    border: 1px solid #e5e7eb;
+    border-radius: 16px;
     color: var(--vortex-dark);
-    transition: 0.3s ease;
+    padding: 28px;
+    box-shadow: 0 8px 24px rgba(31, 42, 64, 0.08);
 }
 
 .feature-card:hover {
-    background-color: var(--vortex-blue);
-    color: white;
-    transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.1);
+    transform: translateY(-8px);
+    border-color: var(--vortex-blue);
+    box-shadow: 0 14px 35px rgba(31, 42, 64, 0.15);
+    color: var(--vortex-dark);
 }
 
 .btn {
     display: inline-block;
-    padding: 10px 20px;
+    padding: 12px 24px;
     font-size: 16px;
     font-weight: 700;
     background: var(--vortex-red);
-    color: black;
+    color: #fff;
     text-decoration: none;
-    border-radius: 5px;
+    border: none;
+    border-radius: 8px;
     transition: 0.3s;
+    box-shadow: 0 8px 20px rgba(255, 94, 91, 0.25);
 }
 
 .btn-catalogue {
@@ -81,7 +86,9 @@
 
 
 .btn:hover {
-  background-color: var(--vortex-red);
+    background: #e63946;
+    color: #fff;
+    transform: translateY(-2px);
 }
 
 .btn-feature {
@@ -158,13 +165,21 @@
   box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
+.risk-warning {
+    background: rgba(239, 68, 68, 0.08);
+    border-left: 4px solid var(--vortex-red);
+    padding: 18px;
+    border-radius: 10px;
+    color: #f8fafc;
+}
+/*
 .user-link {
     color: var(--vortex-red) !important;
 }
 
 .user-link:hover {
     color: var(--vortex-blue) !important;
-}
+}*/
 
 /* Définir l'animation du tremblement */
 @keyframes shake {
